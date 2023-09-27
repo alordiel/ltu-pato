@@ -1,88 +1,336 @@
-<script setup>
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+<script>
+import ListOfExcercises from './ListOfExcercises.vue'
+
+const examsData = [
+  {
+    title: 'Упражнение 1',
+    subtitle: 'Дегенерация, Протеинови дегенерации, Хиалиноза',
+    images: [
+      { filename:'exc01/Degeneratio parenchymatosa hepatis 234.jpg', name: 'Degeneratio parenchymatosa hepatis 234', description:''},
+      { filename:'exc01/Degeneratio parenchymatosa hepatis 234 (3).JPG', name: 'Degeneratio parenchymatosa hepatis 234 (3)', description:''},
+      { filename:'exc01/Degeneratio parenchymatosa renis 245 .JPG', name: 'Degeneratio parenchymatosa renis 245 ', description:''},
+      { filename:'exc01/Degeneratio hyalinosa renis_182_b_cow.JPG', name: 'Degeneratio hyalinosa renis_182_b_cow', description:''},
+      { filename:'exc01/Degeneratio hyalinosa musculorum agne_182_a.JPG', name: 'Degeneratio hyalinosa musculorum agne_182_a', description:''},
+      { filename:'exc01/Degeneratio hyalinosa renis_182_b_cow (3).JPG', name: 'Degeneratio hyalinosa renis_182_b_cow (3)', description:''},
+      { filename:'exc01/Degeneratio hyalinosa musculorum_agne_182_a.JPG', name: 'Degeneratio hyalinosa musculorum_agne_182_a', description:''},
+      { filename:'exc01/Degeneratio hyalinosa renis_182_b_cow (2).JPG', name: 'Degeneratio hyalinosa renis_182_b_cow (2)', description:''},
+      { filename:'exc01/Degeneratio parenchymatosa renis 245  (2).JPG', name: 'Degeneratio parenchymatosa renis 245  (2)', description:''},
+      { filename:'exc01/Degeneratio hyalinosa renis_182_b_cow (4).JPG', name: 'Degeneratio hyalinosa renis_182_b_cow (4)', description:''},
+      { filename:'exc01/Degeneratio parenchymatosa hepatis 234 (2).JPG', name: 'Degeneratio parenchymatosa hepatis 234 (2)', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 2',
+    subtitle: 'Амилоидна, Кератиноидна и Колоидна дегенерации',
+    images: [
+      { filename:'exc02/Amyloidosis lienis B-219a-3.JPG', name: 'Amyloidosis lienis B-219a-3', description:''},
+      { filename:'exc02/Amyloidosis lienis B-219a-2.JPG', name: 'Amyloidosis lienis B-219a-2', description:''},
+      { filename:'exc02/Hyperplasia et prosoplasia glandulae mucosae E-258-2.JPG', name: 'Hyperplasia et prosoplasia glandulae mucosae E-258-2', description:''},
+      { filename:'exc02/Hyperplasia et prosoplasia glandulae mucosae E-258-3.JPG', name: 'Hyperplasia et prosoplasia glandulae mucosae E-258-3', description:''},
+      { filename:'exc02/Hyperplasia et prosoplasia glandulae mucosae E-258-1.JPG', name: 'Hyperplasia et prosoplasia glandulae mucosae E-258-1', description:''},
+      { filename:'exc02/Cancroid D-127a-1.JPG', name: 'Cancroid D-127a-1', description:''},
+      { filename:'exc02/Struma colloidesF-96-2.JPG', name: 'Struma colloidesF-96-2', description:''},
+      { filename:'exc02/Struma colloidesF-96-1.JPG', name: 'Struma colloidesF-96-1', description:''},
+      { filename:'exc02/Amyloidosis hepatis A-27a-2.JPG', name: 'Amyloidosis hepatis A-27a-2', description:''},
+      { filename:'exc02/Amyloidosis hepatis A-27a-3.JPG', name: 'Amyloidosis hepatis A-27a-3', description:''},
+      { filename:'exc02/Amyloidosis lienis B-219a-1.JPG', name: 'Amyloidosis lienis B-219a-1', description:''},
+      { filename:'exc02/Ichtiosis congenita C 205 2.JPG', name: 'Ichtiosis congenita C 205 2', description:''},
+      { filename:'exc02/Cancroid D-127a-2.JPG', name: 'Cancroid D-127a-2', description:''},
+      { filename:'exc02/Ichtiosis congenita C 205 1.JPG', name: 'Ichtiosis congenita C 205 1', description:''},
+      { filename:'exc02/Amyloidosis hepatis 27_a.JPG', name: 'Amyloidosis hepatis 27_a', description:''},
+    ]
+  },
+ {
+    title: 'Упражнение 3',
+    subtitle: 'Нуклеопротеидни дегенерации, Патологични пигментации',
+    images: [
+      { filename:'exc03/Icterus E-28a-2.JPG', name: 'exc03/Icterus E-28a-2.JPG', description:''},
+      { filename:'exc03/Diathesis urica A-109-1.JPG', name: 'exc03/Diathesis urica A-109-1.JPG', description:''},
+      { filename:'exc03/Xantinosis renis B-79-3.JPG', name: 'exc03/Xantinosis renis B-79-3.JPG', description:''},
+      { filename:'exc03/Icterus E-28a-1.JPG', name: 'exc03/Icterus E-28a-1.JPG', description:''},
+      { filename:'exc03/Xantinosis renis B-79-2.JPG', name: 'exc03/Xantinosis renis B-79-2.JPG', description:''},
+      { filename:'exc03/Anthracosis noduli lymphatici G-137b-3.JPG', name: 'exc03/Anthracosis noduli lymphatici G-137b-3.JPG', description:''},
+      { filename:'exc03/Diathesis uricaA-109-2.JPG', name: 'exc03/Diathesis uricaA-109-2.JPG', description:''},
+      { filename:'exc03/Anthracosis noduli lumphatici G-137b-1.JPG', name: 'exc03/Anthracosis noduli lumphatici G-137b-1.JPG', description:''},
+      { filename:'exc03/Diathesis urica A-109-3.JPG', name: 'exc03/Diathesis urica A-109-3.JPG', description:''},
+      { filename:'exc03/Melanosis maculosa C-53b-1.JPG', name: 'exc03/Melanosis maculosa C-53b-1.JPG', description:''},
+      { filename:'exc03/Icterus E-28a-3.JPG', name: 'exc03/Icterus E-28a-3.JPG', description:''},
+      { filename:'exc03/Haemosiderosis hepatis D-264-2.JPG', name: 'exc03/Haemosiderosis hepatis D-264-2.JPG', description:''},
+      { filename:'exc03/Anthracosis pulmonum F-137a-2.JPG', name: 'exc03/Anthracosis pulmonum F-137a-2.JPG', description:''},
+      { filename:'exc03/Melanosis maculosa C-53b-2.JPG', name: 'exc03/Melanosis maculosa C-53b-2.JPG', description:''},
+      { filename:'exc03/Anthracosis noduli lymphaticiG-137b-2.JPG', name: 'exc03/Anthracosis noduli lymphaticiG-137b-2.JPG', description:''},
+      { filename:'exc03/Hemosiderosis hepatis D-264-1.JPG', name: 'exc03/Hemosiderosis hepatis D-264-1.JPG', description:''},
+      { filename:'exc03/Xantinosis renis B-79-1.JPG', name: 'exc03/Xantinosis renis B-79-1.JPG', description:''},
+      { filename:'exc03/Anthracosis pulmonum F-137a-1.JPG', name: 'exc03/Anthracosis pulmonum F-137a-1.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 4',
+    subtitle: 'Дегенерации асоциирани с метаболизъм на мазнини и минерали',
+    images: [
+      { filename:'exc04/Infiltratio lipomatosa hepatis A-227_1.jpg', name: 'exc04/Infiltratio lipomatosa hepatis A-227_1.jpg', description:''},
+      { filename:'exc04/Degeneratio lipomatosa hepatis B-226_1.jpg', name: 'exc04/Degeneratio lipomatosa hepatis B-226_1.jpg', description:''},
+      { filename:'exc04/Infiltratio lipomatosa hepatis A-227_2.jpg', name: 'exc04/Infiltratio lipomatosa hepatis A-227_2.jpg', description:''},
+      { filename:'exc04/histohimia cordis 3.jpg', name: 'exc04/histohimia cordis 3.jpg', description:''},
+      { filename:'exc04/atheromatosis aortae C-221_1.jpg', name: 'exc04/atheromatosis aortae C-221_1.jpg', description:''},
+      { filename:'exc04/Osteodystrophia fibrosa E-37a_2.jpg', name: 'exc04/Osteodystrophia fibrosa E-37a_2.jpg', description:''},
+      { filename:'exc04/Osteodystrophia fibrosa E-37a_1.jpg', name: 'exc04/Osteodystrophia fibrosa E-37a_1.jpg', description:''},
+      { filename:'exc04/Atheromatosis aortae C-221_4.jpg', name: 'exc04/Atheromatosis aortae C-221_4.jpg', description:''},
+      { filename:'exc04/Atheromatosis aortaeC-221_3.jpg', name: 'exc04/Atheromatosis aortaeC-221_3.jpg', description:''},
+      { filename:'exc04/Degeneratio lipomatosa hepatisB-226_2.jpg', name: 'exc04/Degeneratio lipomatosa hepatisB-226_2.jpg', description:''},
+      { filename:'exc04/Necroses myocardii. Calcificatio. Hypovitaminosis E D-63a-1.jpg', name: 'exc04/Necroses myocardii. Calcificatio. Hypovitaminosis E D-63a-1.jpg', description:''},
+      { filename:'exc04/Atheromatosis aortae C-221_2.jpg', name: 'exc04/Atheromatosis aortae C-221_2.jpg', description:''},
+      { filename:'exc04/Osteodystrophia fibrosa E-37a_3.JPG', name: 'exc04/Osteodystrophia fibrosa E-37a_3.JPG', description:''},
+      { filename:'exc04/NECROSES MYOCARDII D-63a-2.jpg', name: 'exc04/NECROSES MYOCARDII D-63a-2.jpg', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 5',
+    subtitle: 'НЕКРОЗА- ВИДОВЕ. ГАНГРЕНА',
+    images: [
+      {filename:'exc05/Necroses cerebeli. Encephalomalacia. Avitaminosis E D-218-2.JPG',name:'exc05/Necroses cerebeli. Encephalomalacia. Avitaminosis E D-218-2.JPG', description: ''},
+      {filename:'exc05/Necroses hepatis C-246 3.JPG',name:'exc05/Necroses hepatis C-246 3.JPG', description: ''},
+      {filename:'exc05/Degeneratio toxica hepatis B-262-2.JPG',name:'exc05/Degeneratio toxica hepatis B-262-2.JPG', description: ''},
+      {filename:'exc05/Lymphadenitis tuberculosa. Caseosatio. F-181.JPG',name:'exc05/Lymphadenitis tuberculosa. Caseosatio. F-181.JPG', description: ''},
+      {filename:'exc05/Encephalomyelitis infectiossa, tygropiknosis E-216-3.JPG',name:'exc05/Encephalomyelitis infectiossa, tygropiknosis E-216-3.JPG', description: ''},
+      {filename:'exc05/Necroses hepatis C-246 1.JPG',name:'exc05/Necroses hepatis C-246 1.JPG', description: ''},
+      {filename:'exc05/Encephalomyelitis infectiosa, tygropiknosis. E-216-1.JPG',name:'exc05/Encephalomyelitis infectiosa, tygropiknosis. E-216-1.JPG', description: ''},
+      {filename:'exc05/Encephalomyelitis infectiosa. Tygropiknosis E-216-2.JPG',name:'exc05/Encephalomyelitis infectiosa. Tygropiknosis E-216-2.JPG', description: ''},
+      {filename:'exc05/Necroses cerebeli. Encephalomalacia. Avitaminosis E D-218-4.JPG',name:'exc05/Necroses cerebeli. Encephalomalacia. Avitaminosis E D-218-4.JPG', description: ''},
+      {filename:'exc05/Necroses cerebeli. Encephalomalacia. Avitaminosis E D-218-3.JPG',name:'exc05/Necroses cerebeli. Encephalomalacia. Avitaminosis E D-218-3.JPG', description: ''},
+      {filename:'exc05/Necrobiosis renis A188 2.JPG',name:'exc05/Necrobiosis renis A188 2.JPG', description: ''},
+      {filename:'exc05/Necrobiosis renis .JPG',name:'exc05/Necrobiosis renis .JPG', description: ''},
+      {filename:'exc05/Degeneratio toxica hepatis B-262.JPG',name:'exc05/Degeneratio toxica hepatis B-262.JPG', description: ''},
+      {filename:'exc05/Gangraena pulmonum G-167 2.JPG',name:'exc05/Gangraena pulmonum G-167 2.JPG', description: ''},
+      {filename:'exc05/Gangraena pulmonum G-167 1.JPG',name:'exc05/Gangraena pulmonum G-167 1.JPG', description: ''},
+      {filename:'exc05/Necroses cerebeli.Encephalomalacia, Avitaminosis E D-218-1.JPG',name:'exc05/Necroses cerebeli.Encephalomalacia, Avitaminosis E D-218-1.JPG', description: ''},
+    ]
+  },
+  {
+    title: 'Упражнение 6',
+    subtitle: 'ЦИРКУЛАТОРНИ НАРУШЕНИЯ- ИСХЕМИЯ ТРОМБОЗА',
+    images: [
+      { filename:'exc06/CoagulumC-48-1.JPG', name: 'exc06/CoagulumC-48-1.JPG', description:''},
+      { filename:'exc06/Infarctus haemorrhagicus_PULMO_SWINE B-254.JPG', name: 'exc06/Infarctus haemorrhagicus_PULMO_SWINE B-254.JPG', description:''},
+      { filename:'exc06/Endartheritis_thromboticans_parasitaria_golqmo_uvelichenie_G1 89 3.JPG', name: 'exc06/Endartheritis_thromboticans_parasitaria_golqmo_uvelichenie_G1 89 3.JPG', description:''},
+      { filename:'exc06/Endarteritis thromboticans parasitariaE2-214.JPG', name: 'exc06/Endarteritis thromboticans parasitariaE2-214.JPG', description:''},
+      { filename:'exc06/Endarteritis thromboticans parasitaria_kon_arteria_s_trombotichna_masaG1 89 1.JPG', name: 'exc06/Endarteritis thromboticans parasitaria_kon_arteria_s_trombotichna_masaG1 89 1.JPG', description:''},
+      { filename:'exc06/Infarctus anaemicus A1 253 renis .JPG', name: 'exc06/Infarctus anaemicus A1 253 renis .JPG', description:''},
+      { filename:'exc06/Coagulum_sanguinis_D2 83A.JPG', name: 'exc06/Coagulum_sanguinis_D2 83A.JPG', description:''},
+      { filename:'exc06/Endarteriitis thromboticans parasitaria_smesen_pristenen_trombE1-214.JPG', name: 'exc06/Endarteriitis thromboticans parasitaria_smesen_pristenen_trombE1-214.JPG', description:''},
+      { filename:'exc06/Infarctus anaemicus A2 253 ren .JPG', name: 'exc06/Infarctus anaemicus A2 253 ren .JPG', description:''},
+      { filename:'exc06/Coagulum, sanguinis_червен_кръвен_съсирекD1 83A.JPG', name: 'exc06/Coagulum, sanguinis_червен_кръвен_съсирекD1 83A.JPG', description:''},
+      { filename:'exc06/Endarteritis thromboticans parasitaria_fibroblasti_fibrociti_golqmo_uvelichenie_G1 89 2.JPG', name: 'exc06/Endarteritis thromboticans parasitaria_fibroblasti_fibrociti_golqmo_uvelichenie_G1 89 2.JPG', description:''},
+      { filename:'exc06/Coagulum_бял_кръвен_съсирек C-48-2.JPG', name: 'exc06/Coagulum_бял_кръвен_съсирек C-48-2.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 7',
+    subtitle: 'ЦИРКУЛАТОРНИ СМУЩЕНИЯ-ХИПЕРЕМИЯ И ОТОК',
+    images: [
+      { filename:'exc07/Hyperplasia et psosoplasia glandulae mucosae oesophagi D-258-2.JPG', name: 'exc07/Hyperplasia et psosoplasia glandulae mucosae oesophagi D-258-2.JPG', description:''},
+      { filename:'exc07/Hyperplasia et prosoplasia glandulae mucosae oesophagi D-258-1.JPG', name: 'exc07/Hyperplasia et prosoplasia glandulae mucosae oesophagi D-258-1.JPG', description:''},
+      { filename:'exc07/oEDEMA PULMONUM + ANTHRACOSIS C-12a-1.JPG', name: 'exc07/oEDEMA PULMONUM + ANTHRACOSIS C-12a-1.JPG', description:''},
+      { filename:'exc07/HYperplasia et prosoplasia glandulae mucosae oesophagi D-258-3.JPG', name: 'exc07/HYperplasia et prosoplasia glandulae mucosae oesophagi D-258-3.JPG', description:''},
+      { filename:'exc07/HYPERAEMIA PASSIVA CUM ATROPHIA CYANOTICA HEPATIS A-263-2.JPG', name: 'exc07/HYPERAEMIA PASSIVA CUM ATROPHIA CYANOTICA HEPATIS A-263-2.JPG', description:''},
+      { filename:'exc07/Emphysema pulmonum E-8.JPG', name: 'exc07/Emphysema pulmonum E-8.JPG', description:''},
+      { filename:'exc07/Atrophia renis F-17.JPG', name: 'exc07/Atrophia renis F-17.JPG', description:''},
+      { filename:'exc07/HYPERAEMIA PASSIVA CUM CYANOTICA HEPATIS A-263-1.JPG', name: 'exc07/HYPERAEMIA PASSIVA CUM CYANOTICA HEPATIS A-263-1.JPG', description:''},
+      { filename:'exc07/Hyperaemia passiva et oedema stagnationis hepatis B-237-2.JPG', name: 'exc07/Hyperaemia passiva et oedema stagnationis hepatis B-237-2.JPG', description:''},
+      { filename:'exc07/HYPERAEMIA PASSIVA ET OEDEMA STAGNATIONIS HPEATIS B-237-1.JPG', name: 'exc07/HYPERAEMIA PASSIVA ET OEDEMA STAGNATIONIS HPEATIS B-237-1.JPG', description:''},
+      { filename:'exc07/Hyperaemia passiva et oedema stagnationis hepatis B-237-3.JPG', name: 'exc07/Hyperaemia passiva et oedema stagnationis hepatis B-237-3.JPG', description:''},
+      { filename:'exc07/Oedema pulmonum anthracosis C-12a-2.JPG', name: 'exc07/Oedema pulmonum anthracosis C-12a-2.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 8',
+    subtitle: 'ВЪЗПАЛЕНИЕ- ОБЩО. КЛАСИФИКАЦИЯ',
+    images: [
+      { filename:'exc08/HEPATITIS APOSTEMATOSA F-165-2.JPG', name: 'exc08/HEPATITIS APOSTEMATOSA F-165-2.JPG', description:''},
+      { filename:'exc08/BRONCHOPNEUMONIA CATARRHALIS PURULENTA H-229-3.JPG', name: 'exc08/BRONCHOPNEUMONIA CATARRHALIS PURULENTA H-229-3.JPG', description:''},
+      { filename:'exc08/LYMPHADENITIS PURULENTA G-225-3.JPG', name: 'exc08/LYMPHADENITIS PURULENTA G-225-3.JPG', description:''},
+      { filename:'exc08/BRONCHOPNEUMONIA CATARHALIS C-129.JPG', name: 'exc08/BRONCHOPNEUMONIA CATARHALIS C-129.JPG', description:''},
+      { filename:'exc08/ENTERITIS CATAHRALIS B-126-2.JPG', name: 'exc08/ENTERITIS CATAHRALIS B-126-2.JPG', description:''},
+      { filename:'exc08/BRONCHOPNEUMONIA CATARRHALIS PURULENTA H-229-2.JPG', name: 'exc08/BRONCHOPNEUMONIA CATARRHALIS PURULENTA H-229-2.JPG', description:''},
+      { filename:'exc08/ABSCESSUS HEPATIS D-143-1.JPG', name: 'exc08/ABSCESSUS HEPATIS D-143-1.JPG', description:''},
+      { filename:'exc08/gLOMERULONEPHRITIS SEROSA A-9-1.JPG', name: 'exc08/gLOMERULONEPHRITIS SEROSA A-9-1.JPG', description:''},
+      { filename:'exc08/HEPATITIS APOSTEMATOSA F-165-1.JPG', name: 'exc08/HEPATITIS APOSTEMATOSA F-165-1.JPG', description:''},
+      { filename:'exc08/ABSCESSUS HEPATIS D-143-2.JPG', name: 'exc08/ABSCESSUS HEPATIS D-143-2.JPG', description:''},
+      { filename:'exc08/LYMPHADENITIS PURULENTA G-225-2.JPG', name: 'exc08/LYMPHADENITIS PURULENTA G-225-2.JPG', description:''},
+      { filename:'exc08/BRONCHOPNEUMONIE CATARRHALIS C-129-3.JPG', name: 'exc08/BRONCHOPNEUMONIE CATARRHALIS C-129-3.JPG', description:''},
+      { filename:'exc08/HEPATITIS APOSTEMATOSA F-165-3.JPG', name: 'exc08/HEPATITIS APOSTEMATOSA F-165-3.JPG', description:''},
+      { filename:'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50-1.JPG', name: 'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50-1.JPG', description:''},
+      { filename:'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50-3.JPG', name: 'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50-3.JPG', description:''},
+      { filename:'exc08/ABSCESSUS HEPATISD-143-3.JPG', name: 'exc08/ABSCESSUS HEPATISD-143-3.JPG', description:''},
+      { filename:'exc08/ENTERITIS CATARRHALIS B-126-1.JPG', name: 'exc08/ENTERITIS CATARRHALIS B-126-1.JPG', description:''},
+      { filename:'exc08/GLOMERULONEPHRITIS SEROSA A-9-2.JPG', name: 'exc08/GLOMERULONEPHRITIS SEROSA A-9-2.JPG', description:''},
+      { filename:'exc08/LYMPHADENITIS PURULENTA G-225-1.JPG', name: 'exc08/LYMPHADENITIS PURULENTA G-225-1.JPG', description:''},
+      { filename:'exc08/BRONCHOPNEUMONIA CATARRHALIS PURULENTA H-229-1.JPG', name: 'exc08/BRONCHOPNEUMONIA CATARRHALIS PURULENTA H-229-1.JPG', description:''},
+      { filename:'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50.JPG', name: 'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50.JPG', description:''},
+      { filename:'exc08/BRONCHOPNEUMONIA CATARHALLISC-129-2.JPG', name: 'exc08/BRONCHOPNEUMONIA CATARHALLISC-129-2.JPG', description:''},
+      { filename:'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50-2.JPG', name: 'exc08/ABSCESSUS HEPATIS CAPSULATIO E 50-2.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 9',
+    subtitle: 'ХЕМОРАГИЧНО, ФИБРОЗНО И ПРОЛИФЕРАТИВНО ВЪЗПАЛЕНИЕ',
+    images: [
+      { filename:'exc09/Colitis deiphtheroides-Parathyphusuum  D248-1.JPG', name: 'exc09/Colitis deiphtheroides-Parathyphusuum  D248-1.JPG', description:''},
+      { filename:'exc09/Hepatitis interstitialis  H-266-1.JPG', name: 'exc09/Hepatitis interstitialis  H-266-1.JPG', description:''},
+      { filename:'exc09/Glomerulonephritis acutaB255.JPG', name: 'exc09/Glomerulonephritis acutaB255.JPG', description:''},
+      { filename:'exc09/Pneumonia interstitialis G-211-3.JPG', name: 'exc09/Pneumonia interstitialis G-211-3.JPG', description:''},
+      { filename:'exc09/Pneumonia crouposa  E70-1.JPG', name: 'exc09/Pneumonia crouposa  E70-1.JPG', description:''},
+      { filename:'exc09/Glomerulonephritis acuta B255-1.JPG', name: 'exc09/Glomerulonephritis acuta B255-1.JPG', description:''},
+      { filename:'exc09/Pericarditis fibrinosaC4-4.JPG', name: 'exc09/Pericarditis fibrinosaC4-4.JPG', description:''},
+      { filename:'exc09/Pericarditis fibrinosa C4-2.JPG', name: 'exc09/Pericarditis fibrinosa C4-2.JPG', description:''},
+      { filename:'exc09/Pneumonia intersticialis G-211-1.JPG', name: 'exc09/Pneumonia intersticialis G-211-1.JPG', description:''},
+      { filename:'exc09/Nephritis interstitialis  F138-1.JPG', name: 'exc09/Nephritis interstitialis  F138-1.JPG', description:''},
+      { filename:'exc09/Nephritis interstitialis F138.JPG', name: 'exc09/Nephritis interstitialis F138.JPG', description:''},
+      { filename:'exc09/Pneumonia crouposa E70.JPG', name: 'exc09/Pneumonia crouposa E70.JPG', description:''},
+      { filename:'exc09/Hepatitis interstitialis H-266.JPG', name: 'exc09/Hepatitis interstitialis H-266.JPG', description:''},
+      { filename:'exc09/Pneumonia interstitialis G-211-2.JPG', name: 'exc09/Pneumonia interstitialis G-211-2.JPG', description:''},
+      { filename:'exc09/Pericarditis fibrinosa C4-3.JPG', name: 'exc09/Pericarditis fibrinosa C4-3.JPG', description:''},
+      { filename:'exc09/Pericarditis fibrinosa C4.JPG', name: 'exc09/Pericarditis fibrinosa C4.JPG', description:''},
+      { filename:'exc09/Enteritis haemorrhagica  A121-3.JPG', name: 'exc09/Enteritis haemorrhagica  A121-3.JPG', description:''},
+      { filename:'exc09/Enteritis haemorrhagica  A121-1.JPG', name: 'exc09/Enteritis haemorrhagica  A121-1.JPG', description:''},
+      { filename:'exc09/Enteritis haemorrhagica  A121-2.JPG', name: 'exc09/Enteritis haemorrhagica  A121-2.JPG', description:''},
+      { filename:'exc09/Colitis deiphtheroides-Parathyphusuum  D248-2.JPG', name: 'exc09/Colitis deiphtheroides-Parathyphusuum  D248-2.JPG', description:''},
+      { filename:'exc09/Colitis deiphtheroides-Parathyphusuum  D248-22.jpg', name: 'exc09/Colitis deiphtheroides-Parathyphusuum  D248-22.jpg', description:''},
+      { filename:'exc09/Enteritis haemorrhagica A121.JPG', name: 'exc09/Enteritis haemorrhagica A121.JPG', description:''},
+      { filename:'exc09/Pneumonia crouposa  E70-3.JPG', name: 'exc09/Pneumonia crouposa  E70-3.JPG', description:''},
+      { filename:'exc09/Pericarditis fibrinosa C4-1.JPG', name: 'exc09/Pericarditis fibrinosa C4-1.JPG', description:''},
+      { filename:'exc09/Colitis deiphtheroides-Parathyphusuum D248.JPG', name: 'exc09/Colitis deiphtheroides-Parathyphusuum D248.JPG', description:''},
+      { filename:'exc09/Pneumonia crouposa  E70-2.JPG', name: 'exc09/Pneumonia crouposa  E70-2.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 10',
+    subtitle: 'ГРАНУЛОМНИ ВЪЗПАЛЕНИЯ',
+    images: [
+      { filename:'exc10/Pneumonia spergilosa E250.JPG', name: 'exc10/Pneumonia spergilosa E250.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS  C78-4.JPG', name: 'exc10/ACTINOMYCOSIS  C78-4.JPG', description:''},
+      { filename:'exc10/Pneumonia mycotica D184-2.JPG', name: 'exc10/Pneumonia mycotica D184-2.JPG', description:''},
+      { filename:'exc10/LYMPHADENITIS TUBERCULOSA A16.JPG', name: 'exc10/LYMPHADENITIS TUBERCULOSA A16.JPG', description:''},
+      { filename:'exc10/Pneumonia spergilosa  E250-1.JPG', name: 'exc10/Pneumonia spergilosa  E250-1.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS B32.JPG', name: 'exc10/ACTINOMYCOSIS B32.JPG', description:''},
+      { filename:'exc10/LYMPHADENITIS TUBERCULOSA  A16-1.JPG', name: 'exc10/LYMPHADENITIS TUBERCULOSA  A16-1.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS  C78-1.JPG', name: 'exc10/ACTINOMYCOSIS  C78-1.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS  C78-2.JPG', name: 'exc10/ACTINOMYCOSIS  C78-2.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS  B32-2.JPG', name: 'exc10/ACTINOMYCOSIS  B32-2.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS  C78-3.JPG', name: 'exc10/ACTINOMYCOSIS  C78-3.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS  B32-1.JPG', name: 'exc10/ACTINOMYCOSIS  B32-1.JPG', description:''},
+      { filename:'exc10/PNEUMONIA MYCOTICA D184.JPG', name: 'exc10/PNEUMONIA MYCOTICA D184.JPG', description:''},
+      { filename:'exc10/Enteritis paratuberculosa F256-2.JPG', name: 'exc10/Enteritis paratuberculosa F256-2.JPG', description:''},
+      { filename:'exc10/LYMPHADENITIS TUBERCULOSA A16-2.JPG', name: 'exc10/LYMPHADENITIS TUBERCULOSA A16-2.JPG', description:''},
+      { filename:'exc10/Enteritis paratuberculosa F256-1.JPG', name: 'exc10/Enteritis paratuberculosa F256-1.JPG', description:''},
+      { filename:'exc10/Enteritis paratuberculosa F256.JPG', name: 'exc10/Enteritis paratuberculosa F256.JPG', description:''},
+      { filename:'exc10/Pneumonia mycotica D184-1.JPG', name: 'exc10/Pneumonia mycotica D184-1.JPG', description:''},
+      { filename:'exc10/ACTINOMYCOSIS  C78.JPG', name: 'exc10/ACTINOMYCOSIS  C78.JPG', description:''},
+      { filename:'exc10/Pneumonia spergilosa E250-2.JPG', name: 'exc10/Pneumonia spergilosa E250-2.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 11',
+    subtitle: 'Неоплазии-ОБЩО',
+    images: [
+      { filename:'exc11/Fibroma durum A151a-2.JPG', name: 'exc11/Fibroma durum A151a-2.JPG', description:''},
+      { filename:'exc11/Sarcoma globocellulare  B45-1.JPG', name: 'exc11/Sarcoma globocellulare  B45-1.JPG', description:''},
+      { filename:'exc11/Myxofibroma 247a.JPG', name: 'exc11/Myxofibroma 247a.JPG', description:''},
+      { filename:'exc11/Sarcoma fuscocellulare D46-1.JPG', name: 'exc11/Sarcoma fuscocellulare D46-1.JPG', description:''},
+      { filename:'exc11/Myxofibroma F247a-1.JPG', name: 'exc11/Myxofibroma F247a-1.JPG', description:''},
+      { filename:'exc11/Sarcoma fuscocellulare D46-2.JPG', name: 'exc11/Sarcoma fuscocellulare D46-2.JPG', description:''},
+      { filename:'exc11/Sarcoma gigantocellulare e 43 1.JPG', name: 'exc11/Sarcoma gigantocellulare e 43 1.JPG', description:''},
+      { filename:'exc11/Sarcoma gigantocellulare e 43 2.JPG', name: 'exc11/Sarcoma gigantocellulare e 43 2.JPG', description:''},
+      { filename:'exc11/Fibroma durum A151a-3.JPG', name: 'exc11/Fibroma durum A151a-3.JPG', description:''},
+      { filename:'exc11/Fibroma durum A151a-1.JPG', name: 'exc11/Fibroma durum A151a-1.JPG', description:''},
+      { filename:'exc11/Fibroma durum A151.JPG', name: 'exc11/Fibroma durum A151.JPG', description:''},
+      { filename:'exc11/Sarcoma mixtocellulare C45a-1.JPG', name: 'exc11/Sarcoma mixtocellulare C45a-1.JPG', description:''},
+      { filename:'exc11/Fibroma molle oedematosum A151b-2.JPG', name: 'exc11/Fibroma molle oedematosum A151b-2.JPG', description:''},
+      { filename:'exc11/Sarcoma globocellulare B45.JPG', name: 'exc11/Sarcoma globocellulare B45.JPG', description:''},
+      { filename:'exc11/Sarcoma mixtocellulareC45a-2.JPG', name: 'exc11/Sarcoma mixtocellulareC45a-2.JPG', description:''},
+      { filename:'exc11/Sarcoma mixtocellulare C45a-3.JPG', name: 'exc11/Sarcoma mixtocellulare C45a-3.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 12',
+    subtitle: 'ДОБРОКАЧЕСТВЕНИ И ЗЛОКАЧЕСТВЕНИ ТУМОРИ',
+    images: [
+     { filename:'exc12/RHABDOMYOSARCOMA  h 260 2.JPG', name: 'exc12/RHABDOMYOSARCOMA  h 260 2.JPG', description:''},
+      { filename:'exc12/RHABDOMYOSARCOMA h 260 1.JPG', name: 'exc12/RHABDOMYOSARCOMA h 260 1.JPG', description:''},
+      { filename:'exc12/NEURINOMA e 197 1.JPG', name: 'exc12/NEURINOMA e 197 1.JPG', description:''},
+      { filename:'exc12/LEUCOSIS HEPATIS c 268 2.JPG', name: 'exc12/LEUCOSIS HEPATIS c 268 2.JPG', description:''},
+      { filename:'exc12/HAEMANGIENDOTHELIOMA b- 257.JPG', name: 'exc12/HAEMANGIENDOTHELIOMA b- 257.JPG', description:''},
+      { filename:'exc12/NEURINOMA  e 197.JPG', name: 'exc12/NEURINOMA  e 197.JPG', description:''},
+      { filename:'exc12/GLIOMA d- 187.JPG', name: 'exc12/GLIOMA d- 187.JPG', description:''},
+      { filename:'exc12/LEIOMYOMA UTERI g 267 1.JPG', name: 'exc12/LEIOMYOMA UTERI g 267 1.JPG', description:''},
+      { filename:'exc12/HAEMANGIOMA CAVERNOSUM a-91 2.JPG', name: 'exc12/HAEMANGIOMA CAVERNOSUM a-91 2.JPG', description:''},
+      { filename:'exc12/LEUCOSIS HEPATIS c 268 3.JPG', name: 'exc12/LEUCOSIS HEPATIS c 268 3.JPG', description:''},
+      { filename:'exc12/HAEMANGIENDOTHELIOMA b - 257.JPG', name: 'exc12/HAEMANGIENDOTHELIOMA b - 257.JPG', description:''},
+      { filename:'exc12/LEIOMYOMA UTERI g 267 2.JPG', name: 'exc12/LEIOMYOMA UTERI g 267 2.JPG', description:''},
+      { filename:'exc12/HAEMANGIENDOTHELIOMA b 257.JPG', name: 'exc12/HAEMANGIENDOTHELIOMA b 257.JPG', description:''},
+      { filename:'exc12/GLIOMA d 187.JPG', name: 'exc12/GLIOMA d 187.JPG', description:''},
+      { filename:'exc12/LEUCOSIS HEPATIS c 268 1.JPG', name: 'exc12/LEUCOSIS HEPATIS c 268 1.JPG', description:''},
+      { filename:'exc12/NEURINOMA  e197 3.JPG', name: 'exc12/NEURINOMA  e197 3.JPG', description:''},
+      { filename:'exc12/HAEMANGIOMA CAVERNOSUM HEPAR a-91 1.JPG', name: 'exc12/HAEMANGIOMA CAVERNOSUM HEPAR a-91 1.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 13',
+    subtitle: 'ДОБРОКАЧЕСТВЕНИ ЕПИТЕЛНИ ТУМОРИ',
+    images: [
+      { filename:'exc13/CYSTADENOMA PAPILIFERUM d 54 3.JPG', name: 'exc13/CYSTADENOMA PAPILIFERUM d 54 3.JPG', description:''},
+      { filename:'exc13/ADENOMA GLANDULAE e270 1.JPG', name: 'exc13/ADENOMA GLANDULAE e270 1.JPG', description:''},
+      { filename:'exc13/PAPILLOMA DURUM  a38a 1.JPG', name: 'exc13/PAPILLOMA DURUM  a38a 1.JPG', description:''},
+      { filename:'exc13/ADENOMA PULMONUM c 224.JPG', name: 'exc13/ADENOMA PULMONUM c 224.JPG', description:''},
+      { filename:'exc13/ADENOMAPULMONUM c224 2.JPG', name: 'exc13/ADENOMAPULMONUM c224 2.JPG', description:''},
+      { filename:'exc13/PAPILLOMA DURUM a 38a.JPG', name: 'exc13/PAPILLOMA DURUM a 38a.JPG', description:''},
+      { filename:'exc13/CONDYLLOMA b 261-1.JPG', name: 'exc13/CONDYLLOMA b 261-1.JPG', description:''},
+      { filename:'exc13/CYSTADENOMA PAPILIFERUM d 54 1.JPG', name: 'exc13/CYSTADENOMA PAPILIFERUM d 54 1.JPG', description:''},
+      { filename:'exc13/CONDYLLOMA b 261-2.JPG', name: 'exc13/CONDYLLOMA b 261-2.JPG', description:''},
+      { filename:'exc13/ADENOMA GLANDULAE e 270.JPG', name: 'exc13/ADENOMA GLANDULAE e 270.JPG', description:''},
+      { filename:'exc13/ADENOMA PULMONUM c224 1.JPG', name: 'exc13/ADENOMA PULMONUM c224 1.JPG', description:''},
+      { filename:'exc13/CONDYLLOMA b 261-3.JPG', name: 'exc13/CONDYLLOMA b 261-3.JPG', description:''},
+      { filename:'exc13/CYSTADENOMA PAPILIFERUM d 54 2.JPG', name: 'exc13/CYSTADENOMA PAPILIFERUM d 54 2.JPG', description:''},
+      { filename:'exc13/CONDYLLOMA b-261.JPG', name: 'exc13/CONDYLLOMA b-261.JPG', description:''},
+    ]
+  },
+  {
+    title: 'Упражнение 14',
+    subtitle: 'ЗЛОКАЧЕСТВЕНИ ЕПИТЕЛНИ ТУМОРИ',
+    images: [
+      { filename:'exc14/CARCINOMA BASOCELLULARE b-269 3.JPG', name: 'exc14/CARCINOMA BASOCELLULARE b-269 3.JPG', description:''},
+      { filename:'exc14/MELANOMA MALIGNUM e 271 2.JPG', name: 'exc14/MELANOMA MALIGNUM e 271 2.JPG', description:''},
+      { filename:'exc14/CARCINOMA BASOCELLULARE b-269 1.JPG', name: 'exc14/CARCINOMA BASOCELLULARE b-269 1.JPG', description:''},
+      { filename:'exc14/CARCINOMA SOLIDUM c 101 1.JPG', name: 'exc14/CARCINOMA SOLIDUM c 101 1.JPG', description:''},
+      { filename:'exc14/CARCINOMA BASOCELLULARE b-269 2.JPG', name: 'exc14/CARCINOMA BASOCELLULARE b-269 2.JPG', description:''},
+      { filename:'exc14/MELANOMA MALIGNUM f 242 2.JPG', name: 'exc14/MELANOMA MALIGNUM f 242 2.JPG', description:''},
+      { filename:'exc14/CARCINOMA PLANOCELULARE KERATOIDES (CANCROID) a 127 1.JPG', name: 'exc14/CARCINOMA PLANOCELULARE KERATOIDES (CANCROID) a 127 1.JPG', description:''},
+      { filename:'exc14/ADENOCARCINOMA GLANDULAE SUDORIFERAE d 61 1.JPG', name: 'exc14/ADENOCARCINOMA GLANDULAE SUDORIFERAE d 61 1.JPG', description:''},
+      { filename:'exc14/MELANOMA MALIGNUM (MELANOSRACOMA)e 271 1.JPG', name: 'exc14/MELANOMA MALIGNUM (MELANOSRACOMA)e 271 1.JPG', description:''},
+      { filename:'exc14/CARCINOMA SOLIDUM c 101 3.JPG', name: 'exc14/CARCINOMA SOLIDUM c 101 3.JPG', description:''},
+      { filename:'exc14/CARCINOMA SOLIDUM c 101 2.JPG', name: 'exc14/CARCINOMA SOLIDUM c 101 2.JPG', description:''},
+      { filename:'exc14/CARCINOMA PLANOCELULARE KERATOIDES (CANCROID) a 127 2.JPG', name: 'exc14/CARCINOMA PLANOCELULARE KERATOIDES (CANCROID) a 127 2.JPG', description:''},
+      { filename:'exc14/ADENOCARCINOMA GLANDULAE SUDORIFERAE d 61 2.JPG', name: 'exc14/ADENOCARCINOMA GLANDULAE SUDORIFERAE d 61 2.JPG', description:''},
+      { filename:'exc14/MELANOMA MALIGNUM f 242 1.JPG', name: 'exc14/MELANOMA MALIGNUM f 242 1.JPG', description:''},
+      { filename:'exc14/CARCINOMA PLANOCELULARE KERATOIDES (CANCROID) a 127 3.JPG', name: 'exc14/CARCINOMA PLANOCELULARE KERATOIDES (CANCROID) a 127 3.JPG', description:''},
+    ]
+  },
+]  
+
+export default {
+  components: {
+    ListOfExcercises
+  },
+  data() {
+    return {
+      examsData,
+    }
+  },
+}
 </script>
 
 <template>
-  <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-    <template #heading>Documentation</template>
-
-    Vue’s
-    <a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-    provides you with all information you need to get started.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <ToolingIcon />
-    </template>
-    <template #heading>Tooling</template>
-
-    This project is served and bundled with
-    <a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener">Vite</a>. The
-    recommended IDE setup is
-    <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">VSCode</a> +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank" rel="noopener">Volar</a>. If
-    you need to test your components and web pages, check out
-    <a href="https://www.cypress.io/" target="_blank" rel="noopener">Cypress</a> and
-    <a href="https://on.cypress.io/component" target="_blank" rel="noopener"
-      >Cypress Component Testing</a
-    >.
-
-    <br />
-
-    More instructions are available in <code>README.md</code>.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <EcosystemIcon />
-    </template>
-    <template #heading>Ecosystem</template>
-
-    Get official tools and libraries for your project:
-    <a href="https://pinia.vuejs.org/" target="_blank" rel="noopener">Pinia</a>,
-    <a href="https://router.vuejs.org/" target="_blank" rel="noopener">Vue Router</a>,
-    <a href="https://test-utils.vuejs.org/" target="_blank" rel="noopener">Vue Test Utils</a>, and
-    <a href="https://github.com/vuejs/devtools" target="_blank" rel="noopener">Vue Dev Tools</a>. If
-    you need more resources, we suggest paying
-    <a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">Awesome Vue</a>
-    a visit.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <CommunityIcon />
-    </template>
-    <template #heading>Community</template>
-
-    Got stuck? Ask your question on
-    <a href="https://chat.vuejs.org" target="_blank" rel="noopener">Vue Land</a>, our official
-    Discord server, or
-    <a href="https://stackoverflow.com/questions/tagged/vue.js" target="_blank" rel="noopener"
-      >StackOverflow</a
-    >. You should also subscribe to
-    <a href="https://news.vuejs.org" target="_blank" rel="noopener">our mailing list</a> and follow
-    the official
-    <a href="https://twitter.com/vuejs" target="_blank" rel="noopener">@vuejs</a>
-    twitter account for latest news in the Vue world.
-  </WelcomeItem>
-
-  <WelcomeItem>
-    <template #icon>
-      <SupportIcon />
-    </template>
-    <template #heading>Support Vue</template>
-
-    As an independent project, Vue relies on community backing for its sustainability. You can help
-    us by
-    <a href="https://vuejs.org/sponsor/" target="_blank" rel="noopener">becoming a sponsor</a>.
-  </WelcomeItem>
+  <div>
+    <ListOfExcercises :excercises="examsData" />
+  </div>
 </template>
