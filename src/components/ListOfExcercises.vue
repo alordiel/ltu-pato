@@ -1,10 +1,6 @@
 <script>
 export default {
   props: ['excercises'],
-  setup(props) {
-    // setup() receives props as the first argument.
-    console.log(props.excercises)
-  }
 }
 </script>
 
