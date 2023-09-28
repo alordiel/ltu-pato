@@ -27,6 +27,9 @@ header {
 nav a {
   margin-left: 20px;
 }
+.text-center {
+  text-align:center ;
+}
 
 @media (hover: hover) {
   a:hover {
