@@ -1,6 +1,6 @@
 
 <template>
   <main>
-    HELLO
+    Упражнения по Патоморфология
   </main>
 </template>

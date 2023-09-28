@@ -21,6 +21,7 @@ export default {
 
 <template>
   <div>
+    <h3>Изберете упражнение</h3>
     <ListOfExcercises :excercises="excercises" />
   </div>
 </template>
