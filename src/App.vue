@@ -1,6 +1,5 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import MainPage from './components/MainPage.vue'
 </script>
 
 <template>
@@ -8,11 +7,9 @@ import MainPage from './components/MainPage.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.png" width="125" height="125" />
 
     <div class="wrapper">
-      <MainPage msg="You did it!" />
-
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Начало</RouterLink>
+        <RouterLink to="/about">За проекта</RouterLink>
       </nav>
     </div>
   </header>
