@@ -46,7 +46,7 @@ export default {
             <div class="learning-mode">
                 <div class="image" v-for="(image, key) in currentExcercise.images" :key="'img-' + key">
                     <figure>
-                        <img :src="'/images/thumbnails/'+image.filename" :alt="image.name" width="300">
+                        <img :src="'/pato/images/thumbnails/'+image.filename" :alt="image.name" width="300">
                         <figcaption>{{ image.name }}</figcaption>
                     </figure>
                 </div>

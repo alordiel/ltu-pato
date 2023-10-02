@@ -57,7 +57,7 @@ export default {
         </div>
         <div class="guess-image" v-if="started">
             <figure>
-                <img :src="'/images/Practice/'+examImages[exam.current].filename" :alt="examImages[exam.current].name" width="100%">
+                <img :src="'/pato/images/Practice/'+examImages[exam.current].filename" :alt="examImages[exam.current].name" width="100%">
                 <figcaption v-show="exam.showTitle">{{ examImages[exam.current].name }}</figcaption>
             </figure>
 
