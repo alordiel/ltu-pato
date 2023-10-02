@@ -106,7 +106,7 @@ export default {
 }
 
 .mask {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: rgba(0, 0, 0, .8);
@@ -153,6 +153,7 @@ export default {
   background-color: transparent;
   color: #fff;
   font-size: 3rem;
+  cursor: pointer;
 }
 
 @media (min-width: 1024px) {
